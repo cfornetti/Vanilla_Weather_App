@@ -31,8 +31,17 @@ function displayTemperature (response){
     iconElement.setAttribute("alt", response.data.weather[0].description);
 };
 
+function search (city){
 let apiKey="d41ef9769dc7a581713400eb6cdff7f1";
-let city = "los angeles"
 let apiUrl=`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
 axios.get(apiUrl).then(displayTemperature);
+}
+
+function handleSubmit (event){
+    event.preventDefault();
+    let cityInputElement=document.querySelector("#city-input");
+    search(cityInputElement.value);
+}
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
